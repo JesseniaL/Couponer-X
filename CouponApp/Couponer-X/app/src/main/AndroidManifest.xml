@@ -3,6 +3,9 @@
     package="com.app.jessenialopez.couponer">
 <uses-feauture android:name="android.hardware.camera2"></uses-feauture>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
 
     <application
         android:allowBackup="true"
