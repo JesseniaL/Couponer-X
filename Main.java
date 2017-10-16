@@ -1,12 +1,11 @@
-import java.lang.Object;
+import java.lang.*;
 import java.util.*;
 import java.util.Map;
 import java.io.*;
 import java.io.BufferedWriter;
-import java.nio.file.Files;
+import java.nio.file.*;
 import java.nio.file.Paths;
 import java.lang.NullPointerException;
-
 
 class Information{
 
@@ -14,7 +13,6 @@ class Information{
 	private String expirationDate;
 	private String couponNumber;
 
-	Information(){}
 	// Constructor with 3 parameters
 	Information(String image, String expirationDate, String couponNumber){
 		this.image = image;
@@ -31,59 +29,53 @@ class Information{
 	public String getCouponNumber(){ return couponNumber; }
 	// Returns the string of the object's member variables
 	public String toString(){
-		String wholeString = this.getImage() + " " + this.getExpirationDate() + " " + this.getCouponNumber();
-		return wholeString;		
+		return this.getImage() + " " + this.getExpirationDate() + " " + this.getCouponNumber();
 	}
+}
 
-};
+class Database{
 
-class Hashing {
+	private HashMap<String, List<Information> > hashTable = new HashMap<>();
 
-	private HashMap<String, List<Information> > hashTable = new HashMap<String, List<Information> >();
-	private String storeName;
-	private Information infoObject;
-
-	Hashing(){}
 	// Creates a mapping which maps the information with the name of store
 	public void create(String storeName, String image, String expirationDate, String couponNumber){
-		infoObject = new Information(image, expirationDate, couponNumber);
-		createKey(storeName);
+		// Creates a store with empty ArrayList
+		createStore(storeName);
+		// If there is already a coupon number in the ArrayList, don't create a new one
+		if(doesValueExist(storeName, couponNumber)) { return; }
+		Information infoObject = new Information(image, expirationDate, couponNumber);
+		Information noImage = new Information(null, expirationDate, couponNumber);
+		// Checks if the image is found
+		if(image == null){
+			hashTable.get(storeName).add(noImage);
+			return;
+		}
 		hashTable.get(storeName).add(infoObject);
 	}
-	// set
-	public void setStoreName(String storeName){ this.storeName = storeName; }
-	// get
-	public String getStoreName(){ return storeName; }
 	// Returns the size of the hash map
 	public int size(){ return hashTable.size(); }
 	// Checks if the key exist on the map
-	public boolean containsKey(String key){ return hashTable.containsKey(key); }
+	public boolean containStore(String storeName){ return hashTable.containsKey(storeName); }
 	// Print the keys in the map
-	public void printKeys(){
-		System.out.println(hashTable.keySet());
-	}
+	public void printKeys(){ System.out.println(hashTable.keySet()); }
 	// Print the keys and the values of a specified key
 	public void printMap(String storeName){
-		if(containsKey(storeName)){
+		if(containStore(storeName)){
 			for(int index = 0; index < hashTable.get(storeName).size(); index++){
 				System.out.println( storeName + ": " + hashTable.get(storeName).get(index).toString());
 			}
 		}
 	}
-	// Creates key with an empty vector
-	public void createKey(String storeName){
-		if(!containsKey(storeName)){
-			hashTable.put(storeName, new Vector<>());
-		}
-		// Does nothing if there is a key
-		return;
+	// Creates store with an empty ArrayList
+	public void createStore(String storeName){
+		hashTable.putIfAbsent(storeName, new ArrayList<>());
 	}
 	// Prints all stores corresponding with their values
 	public void printAll(){
 		for(Map.Entry<String, List<Information> > entry : hashTable.entrySet()){
 			String storeName = entry.getKey();
-			for(Information info : entry.getValue()){
-				System.out.println(storeName + ": " + info.toString());
+			for(Information infoObject : entry.getValue()){
+				System.out.println(storeName + ": " + infoObject.toString());
 			}
 		}
 	}
@@ -96,8 +88,8 @@ class Hashing {
 			for(Map.Entry<String, List<Information> > entry : hashTable.entrySet()){
 				String storeName = entry.getKey();
 				// Places the store name and the Infomation details into the buffer
-				for(Information info : entry.getValue()){
-					buffWrite.write(storeName + " " + info.toString());
+				for(Information infoObject : entry.getValue()){
+					buffWrite.write(storeName + " " + infoObject.toString());
 					buffWrite.newLine();
 				}
 			}
@@ -105,8 +97,8 @@ class Hashing {
 			buffWrite.close();
 		}
 		// Not really sure what this does. Need a catch statement.
-		catch(IOException ex) {
-            ex.printStackTrace();
+		catch(IOException ex){ 
+			ex.printStackTrace(); 
 		}
 	}
 	// Read entries from file and places it into the map
@@ -116,7 +108,7 @@ class Hashing {
 			FileReader fileReader = new FileReader("stores.txt");
 			BufferedReader buffReader = new BufferedReader(fileReader);
 			// Read until end of file
-			while(( fileLine = buffReader.readLine() ) != null){
+			while(( fileLine = buffReader.readLine() ) != null ){
 				// Split the file line into tokens
 				String[] tokens = fileLine.split(" ");
 				String storeName = tokens[0];
@@ -133,24 +125,43 @@ class Hashing {
 		}
 	}
 	// Removes a key from the map
-	public boolean removeKey(String storeName){
-		if(containsKey(storeName)){
-			hashTable.remove(storeName);
-			return true;
+	public boolean removeStore(String storeName){
+		if(!containStore(storeName)){
+			return false;
+		}
+		hashTable.remove(storeName);
+		return true;
+	}
+	// Removes a coupon from the map based on coupon number
+	public boolean removeValue(String storeName, String couponNumber){
+		// If store does not exist do nothing
+		if(!containStore(storeName)){ return false; }
+		System.out.println("Your coupon number for deletion: " + couponNumber);
+		System.out.println("Store has coupons: " + hashTable.get(storeName));
+		for(int index = 0; index < hashTable.get(storeName).size(); index++){
+			if(hashTable.get(storeName).get(index).getCouponNumber().equals(couponNumber)){
+				hashTable.get(storeName).remove(index);
+				return true;
+			}
 		}
 		return false;
 	}
-};
+	// Checks if there is already a coupon number in the list
+	public boolean doesValueExist(String storeName, String couponNumber){
+		for(int index = 0; index < hashTable.get(storeName).size(); index++){
+			if(hashTable.get(storeName).get(index).getCouponNumber().equals(couponNumber)){
+				return true;
+			}
+		}
+		return false;
+	}
+}
 
-
-
-public class hash{
+public class Main{
 	public static void main(String args[]){
-		
-		Hashing object = new Hashing();
+
+		Database object = new Database();
 		object.read();
-		// Known bug
-		object.create("TestCase", "99999", "999/999/999", "99999");
 		object.printAll();
 		object.write();
 	}
