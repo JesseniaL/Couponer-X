@@ -64,15 +64,32 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="333dp"
-            android:layout_height="217dp"
+            android:layout_width="336dp"
+            android:layout_height="match_parent"
             android:layout_below="@+id/button1"
             android:layout_marginLeft="27dp"
             android:layout_marginTop="115dp"
             android:adjustViewBounds="false"
             android:scaleType="centerInside" />
 
-
     </FrameLayout>
+
+    <EditText
+        android:id="@+id/storename"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/productname"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/couponexpdate"
+        android:inputType="date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
