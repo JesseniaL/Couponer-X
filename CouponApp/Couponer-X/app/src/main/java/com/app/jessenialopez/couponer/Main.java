@@ -63,7 +63,7 @@ public class Main extends AppCompatActivity {
 
 
         //blank space on the screen linked
-        ImageView = (ImageView) findViewById(R.id.imageView);
+//        ImageView = (ImageView) findViewById(R.id.imageView);
 
         //represent the action when the button is clicked
         button1.setOnClickListener(new View.OnClickListener() {
