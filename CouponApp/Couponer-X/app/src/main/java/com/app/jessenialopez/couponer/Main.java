@@ -44,7 +44,7 @@ public class Main extends AppCompatActivity {
     //Displays image resources
     ImageView ImageView;
     private int count = 0;
-    private long before, after;
+    private boolean update = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class Main extends AppCompatActivity {
 
 
         //blank space on the screen linked
-        ImageView = (ImageView) findViewById(R.id.imageView);
+//        ImageView = (ImageView) findViewById(R.id.imageView);
 
         //represent the action when the button is clicked
         button1.setOnClickListener(new View.OnClickListener() {
@@ -113,8 +113,9 @@ public class Main extends AppCompatActivity {
         String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString()+ "/Camera/CouponX";
         File myDir = new File(root);
         myDir.mkdirs();
+
         //count the initial number of images
-        before = NumberOfImages(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString()+ "/Camera/CouponX"); // "/mnt/sdcard/yourfolder"
+        update = false;
 
         //each name of the pictures should be different, that is why there is a counter
         String fname = "Coupon" + count + ".png";
@@ -126,22 +127,19 @@ public class Main extends AppCompatActivity {
         try {
             FileOutputStream out = new FileOutputStream(file);
             coupon.compress(Bitmap.CompressFormat.PNG, 100, out);
+            update = true;
             out.flush();
             out.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        //count the number of images in the directory after the picture is saved
-        after = NumberOfImages(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString()+ "/Camera/CouponX"); // "/mnt/sdcard/yourfolder"
-
-
         //Toast the user that the coupon/picture has been saved
         //this should be modified, if the OCE do not recognize anything on the picture then it shouldn't save it, I think! lol
-        if (before+1 == after)
-            Toast.makeText(this, "Coupon Saved.", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(this, "ERROR! Coupon NOT Saved.", Toast.LENGTH_LONG).show();
+        if (update) {
+            Toast.makeText(this, "Coupon Saved.", Toast.LENGTH_LONG).show(); }
+        else {
+            Toast.makeText(this, "ERROR! Coupon NOT Saved.", Toast.LENGTH_LONG).show(); }
 
             //set the screen to display the image
             ImageView.setImageBitmap(photo);
@@ -155,52 +153,11 @@ public class Main extends AppCompatActivity {
     }
 
 
-        long NumberOfImages(String repName){
-            File dir = new File(repName);
-            int totalNumFiles = dir.listFiles().length;
-            return totalNumFiles;
-        }
+    long NumberOfImages(String repName){
+        File dir = new File(repName);
+        int totalNumFiles = dir.listFiles().length;
+        return totalNumFiles;
+    }
 
-
-
-        //https://developer.android.com/guide/topics/ui/dialogs.html
-    /*Button btn;
-        btn = (Button) findViewByID(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener () {
-            @Override
-                    public void OnClick(View v) {
-            btn cd = new userDialog(Main.this);
-            cd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            cd.setCancelable(False);
-            cd.show();
-
-        });
-
-
-}
-
-*/
-
-            /*
-
-        //Hashed Database
-        @Override
-       /* protected void callHashMap() {
-
-
-            //Linked button to view the database
-            Button button2 = (Button) findViewById(R.id.button2);
-
-            //When button2 is clicked
-            button2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-
-            });
-        }
-        */
-
-
-}
+    //count++;
+    }
