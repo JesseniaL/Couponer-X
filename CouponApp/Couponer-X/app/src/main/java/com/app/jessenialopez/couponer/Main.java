@@ -1,27 +1,20 @@
 package com.app.jessenialopez.couponer;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-//import java.util.LinkedList;
-//import android.support.v4.app.DialogFragment;
-
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
-import android.media.MediaScannerConnection;
 import android.os.Environment;
 import android.util.Log;
+
+
 
 
 public class Main extends AppCompatActivity {
@@ -167,46 +160,28 @@ public class Main extends AppCompatActivity {
             int totalNumFiles = dir.listFiles().length;
             return totalNumFiles;
         }
-    /*        //https://developer.android.com/guide/topics/ui/dialogs.html
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder build = new AlertDialog.Builder(getActivity());
-            //Getting layout inflater
-            LayoutInflater inflater = getActivity().getLayoutInflater();
 
-            builder.setView(inflater.inflate(R.layout.activity_main, null))
-                    //Adding action buttons
-                    .setPositiveButton(R.string.app_name, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            // sign in
-                        }
-                    })
-                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener(){
-                        public void onCLick(DialogInterface dialog, int id) {
-                            LoginDialogFragment.this.getDialog().cancel();
-                        }
-                    });
-        builder.create();
+
+
+        //https://developer.android.com/guide/topics/ui/dialogs.html
+    /*Button btn;
+        btn = (Button) findViewByID(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener () {
+            @Override
+                    public void OnClick(View v) {
+            btn cd = new userDialog(Main.this);
+            cd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            cd.setCancelable(False);
+            cd.show();
+
+        });
+
 
 }
+
 */
 
-
             /*
-            //Added below:
-            btnpic.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File file = getFile();
-                    camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                    startActivityForResult(camera_intent, CAMERA_REQUEST);
-                }
-            });
-
-        }
-
 
         //Hashed Database
         @Override
