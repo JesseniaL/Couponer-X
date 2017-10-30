@@ -59,6 +59,7 @@ public class Main extends AppCompatActivity {
         //buttons linked with the one on the screen
         Button button1 = (Button) findViewById(R.id.button1);
         Button button2 = (Button) findViewById(R.id.button2);
+        Button test = (Button) findViewById(R.id.button3);
 
 
         //blank space on the screen linked
@@ -87,6 +88,42 @@ public class Main extends AppCompatActivity {
 
                 //start the camera
                 startActivityForResult(intent, ACTIVITY_SELECT_IMAGE);
+            }
+        });
+
+        //Scanner Alert dialog
+        test = setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder aBuilder = new AlertDialog.Builder(Main.this);
+                View tView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                aBuilder.setTitle("Product Store");
+                final Spinner tSpinner = (Spinner) tView.findViewById(R.id.spinner);
+                ArrayAdapter<String> adp = new ArrayAdapter<String>(Main.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.stores));
+                adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                tSpinner.setAdapter(adp);
+
+                aBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (!tSpinner.getSelectedItem().toString().equalsIgnoreCase("Choose a store name ")) {
+                            Toast.makeText(Main.this, tSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                            dialogInterface.dismiss();
+                        }
+
+                    }
+                });
+
+                aBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                aBuilder.setView(tView);
+                AlertDialog dialog = aBuilder.create();
+                dialog.show();
             }
         });
     }
@@ -165,49 +202,4 @@ public class Main extends AppCompatActivity {
 
     //count++;
 
-
-
-    Button test;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        test = (Button) findViewById(R.id.button3);
-        test = setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder aBuilder = new AlertDialog.Builder(Main.this);
-                View tView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                aBuilder.setTitle("Product Store");
-                final Spinner tSpinner = (Spinner) tView.findViewById(R.id.spinner);
-                ArrayAdapter<String> adp = new ArrayAdapter<String>(Main.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.storeList));
-                adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                tSpinner.setAdapter(adp);
-
-                aBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (!tSpinner.getSelectedItem().toString().equalsIgnoreCase("Choose a store name ")) {
-                            Toast.makeText(Main.this, tSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                            dialogInterface.dismiss();
-                        }
-
-                    }
-                });
-
-                aBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                   @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                       dialogInterface.dismiss();
-                   }
-                });
-
-                aBuilder.setView(tView);
-                AlertDialog dialog = aBuilder.create();
-                dialog.show();
-            }
-        });
-    }
 }
