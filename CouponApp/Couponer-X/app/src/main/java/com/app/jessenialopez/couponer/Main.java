@@ -1,13 +1,17 @@
 package com.app.jessenialopez.couponer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -160,4 +164,50 @@ public class Main extends AppCompatActivity {
     }
 
     //count++;
+
+
+
+    Button test;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        test = (Button) findViewById(R.id.button3);
+        test = setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder aBuilder = new AlertDialog.Builder(Main.this);
+                View tView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+                aBuilder.setTitle("Product Store");
+                final Spinner tSpinner = (Spinner) tView.findViewById(R.id.spinner);
+                ArrayAdapter<String> adp = new ArrayAdapter<String>(Main.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.storeList));
+                adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                tSpinner.setAdapter(adp);
+
+                aBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (!tSpinner.getSelectedItem().toString().equalsIgnoreCase("Choose a store name ")) {
+                            Toast.makeText(Main.this, tSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                            dialogInterface.dismiss();
+                        }
+
+                    }
+                });
+
+                aBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                   @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                       dialogInterface.dismiss();
+                   }
+                });
+
+                aBuilder.setView(tView);
+                AlertDialog dialog = aBuilder.create();
+                dialog.show();
+            }
+        });
     }
+}

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Couponer-X</string>
+    <string name="show_dialog">Alert Dialog</string>
+
+    <string-array name="Store">
+        <item>Choose a store name </item>
+        <item>American Eagle</item>
+        <item>Target</item>
+        <item>Uniqlo</item>
+    </string-array>
+</resources>
