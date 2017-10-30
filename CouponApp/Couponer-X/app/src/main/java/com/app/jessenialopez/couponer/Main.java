@@ -99,7 +99,7 @@ public class Main extends AppCompatActivity {
                 View tView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
                 aBuilder.setTitle("Product Store");
                 final Spinner tSpinner = (Spinner) tView.findViewById(R.id.spinner);
-                ArrayAdapter<String> adp = new ArrayAdapter<String>(Main.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.stores));
+                ArrayAdapter<String> adp = new ArrayAdapter<String>(Main.this, android.R.layout.simple_spinner_item, getResources().getStringArray(android.R.layout.stores));
                 adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 tSpinner.setAdapter(adp);
 
