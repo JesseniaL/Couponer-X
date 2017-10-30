@@ -92,7 +92,7 @@ public class Main extends AppCompatActivity {
         });
 
         //Scanner Alert dialog
-        test = setOnClickListener(new View.OnClickListener() {
+        test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder aBuilder = new AlertDialog.Builder(Main.this);
