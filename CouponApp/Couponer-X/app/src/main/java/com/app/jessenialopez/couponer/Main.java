@@ -23,32 +23,12 @@ import android.util.Log;
 
 public class Main extends AppCompatActivity {
 
-    /*
-    private TextView mTextMessage;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    } */
     //Displays image resources
     ImageView ImageView;
     private int count = 0;
     private boolean update = false;
+//    boolean pop = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +41,6 @@ public class Main extends AppCompatActivity {
         Button button2 = (Button) findViewById(R.id.button2);
         Button test = (Button) findViewById(R.id.button3);
 
-
-        //blank space on the screen linked
-//        ImageView = (ImageView) findViewById(R.id.imageView);
 
         //represent the action when the button is clicked
         button1.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +76,7 @@ public class Main extends AppCompatActivity {
                 View tView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
                 aBuilder.setTitle("Product Store");
                 final Spinner tSpinner = (Spinner) tView.findViewById(R.id.spinner);
-                ArrayAdapter<String> adp = new ArrayAdapter<String>(Main.this, android.R.layout.simple_spinner_item, getResources().getStringArray(android.R.array.strings));
+                ArrayAdapter<String> adp = new ArrayAdapter<String>(Main.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.stores));
                 adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 tSpinner.setAdapter(adp);
 
@@ -135,15 +112,8 @@ public class Main extends AppCompatActivity {
         //represent the image itself
         Bitmap photo = (Bitmap) data.getExtras().get("data");
 
-        //set the screen to display the image
-//            ImageView.setImageBitmap(photo);
-
-
         //invoking the saving method
         SavePicture(photo);
-
-//        after = NumberOfImages(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString()+ "/Camera/CouponX"); // "/mnt/sdcard/yourfolder"
-
 
     }
 
@@ -178,17 +148,12 @@ public class Main extends AppCompatActivity {
         //Toast the user that the coupon/picture has been saved
         //this should be modified, if the OCE do not recognize anything on the picture then it shouldn't save it, I think! lol
         if (update) {
-            Toast.makeText(this, "Coupon Saved.", Toast.LENGTH_LONG).show(); }
+            Toast.makeText(this, "Coupon Saved.", Toast.LENGTH_LONG).show();
+//            pop = true;
+//            popScreen(pop);
+        }
         else {
             Toast.makeText(this, "ERROR! Coupon NOT Saved.", Toast.LENGTH_LONG).show(); }
-
-            //set the screen to display the image
-            ImageView.setImageBitmap(photo);
-            //this is where we can store the images in the hashmap, or call the OCR function and then
-            //store the info extracted from the images.
-
-            //for example!!
-            //list.add(photo);
 
         count++;
     }
@@ -199,7 +164,5 @@ public class Main extends AppCompatActivity {
         int totalNumFiles = dir.listFiles().length;
         return totalNumFiles;
     }
-
-    //count++;
-
+    
 }
