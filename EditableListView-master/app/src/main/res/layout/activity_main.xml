@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="applications.editablelistview.MainActivity">
+
+    <EditText
+        android:layout_marginTop="100dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/storeNameText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:hint="Store Name" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/expirationDateText"
+        android:layout_below="@+id/storeNameText"
+        android:layout_centerHorizontal="true"
+        android:hint="Expiration Date"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/couponNumberText"
+        android:layout_below="@+id/expirationDateText"
+        android:layout_centerHorizontal="true"
+        android:hint="CouponNumber"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/addButton"
+        android:layout_alignBaseline="@+id/viewButton"
+        android:layout_alignBottom="@+id/viewButton"
+        android:layout_alignStart="@+id/couponNumberText" />
+
+    <Button
+        android:layout_marginTop="26dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View"
+        android:id="@+id/viewButton"
+        android:layout_below="@+id/couponNumberText"
+        android:layout_alignEnd="@+id/couponNumberText" />
+
+</RelativeLayout>
