@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import java.io.File;
@@ -18,16 +17,13 @@ import java.io.FileOutputStream;
 import android.os.Environment;
 import android.util.Log;
 
-
+import static android.content.Intent.*;
 
 
 public class Main extends AppCompatActivity {
-
-    //Displays image resources
-    ImageView ImageView;
+    String storeName;
     private int count = 0;
     private boolean update = false;
-//    boolean pop = false;
 
 
     @Override
@@ -59,7 +55,7 @@ public class Main extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //switch the original screen to the camera  screen
-                Intent intent = new Intent(Intent.ACTION_PICK,
+                Intent intent = new Intent(ACTION_PICK,
                         android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 final int ACTIVITY_SELECT_IMAGE = 1234;
 
@@ -68,41 +64,84 @@ public class Main extends AppCompatActivity {
             }
         });
 
-        //Scanner Alert dialog
+
+        //Database:
         test.setOnClickListener(new View.OnClickListener() {
+
+            //set the storeName on the Database to be what is stored here
+
+           // MainActivity m = new MainActivity();
+            //m.str(storeName);
+
+            public void onClick(View v) {
+                Intent intent = new Intent(Main.this, MainActivity.class);
+                startActivity(intent);
+            }
+            /*
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder aBuilder = new AlertDialog.Builder(Main.this);
-                View tView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-                aBuilder.setTitle("Product Store");
-                final Spinner tSpinner = (Spinner) tView.findViewById(R.id.spinner);
-                ArrayAdapter<String> adp = new ArrayAdapter<String>(Main.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.stores));
-                adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                tSpinner.setAdapter(adp);
+                Intent intent = new Intent(this, com.app.jessenialopez.couponer.MainActivity.java);
+                intent.putExtra("activitymain", "MainActivity");
+                startActivity(intent);
 
-                aBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (!tSpinner.getSelectedItem().toString().equalsIgnoreCase("Choose a store name ")) {
-                            Toast.makeText(Main.this, tSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                            dialogInterface.dismiss();
-                        }
+        } */
+        });
 
-                    }
-                });
 
-                aBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
 
-                aBuilder.setView(tView);
-                AlertDialog dialog = aBuilder.create();
-                dialog.show();
+    }
+
+//Scanner Alert dialog
+    void Scan() {
+        //test.setOnClickListener(new View.OnClickListener() {
+        //   @Override
+        //public void onClick(View view) {
+        AlertDialog.Builder aBuilder = new AlertDialog.Builder(Main.this);
+        View tView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+        aBuilder.setTitle("Product Store");
+        final Spinner tSpinner = (Spinner) tView.findViewById(R.id.spinner);
+        ArrayAdapter<String> adp = new ArrayAdapter<String>(Main.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.stores));
+        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tSpinner.setAdapter(adp);
+
+        aBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (!tSpinner.getSelectedItem().toString().equalsIgnoreCase("Choose a store name ")) {
+                    storeName = tSpinner.getSelectedItem().toString();
+                    Toast.makeText(Main.this, storeName , Toast.LENGTH_SHORT).show();
+
+                    //EditText selection;
+                    //data(selection);
+                    dialogInterface.dismiss();
+
+                }
             }
         });
+
+
+        aBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        aBuilder.setView(tView);
+        AlertDialog dialog = aBuilder.create();
+        dialog.show();
+        // }
+        // });
+
+        /*
+        @Override
+        protected void onNewIntent(Intent intent) {
+            super.onNewIntent(intent);
+            if(getIntent().getStringArrayExtra("activitymain").equals("MainActivity")) {
+                m;
+            }
+        } */
+
     }
 
     //represent the result of the camera, saving the picture
@@ -118,10 +157,10 @@ public class Main extends AppCompatActivity {
     }
 
     //since the images are now in a specific directory, we can now chage the layout of our app
-    void SavePicture(Bitmap coupon){
+    void SavePicture(Bitmap coupon) {
         //Saving into a directory
         //note the name of the directory is CouponX
-        String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString()+ "/Camera/CouponX";
+        String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString() + "/Camera/CouponX";
         File myDir = new File(root);
         myDir.mkdirs();
 
@@ -149,20 +188,20 @@ public class Main extends AppCompatActivity {
         //this should be modified, if the OCE do not recognize anything on the picture then it shouldn't save it, I think! lol
         if (update) {
             Toast.makeText(this, "Coupon Saved.", Toast.LENGTH_LONG).show();
-//            pop = true;
-//            popScreen(pop);
+            Scan();
         }
+
         else {
-            Toast.makeText(this, "ERROR! Coupon NOT Saved.", Toast.LENGTH_LONG).show(); }
+            Toast.makeText(this, "ERROR! Coupon NOT Saved.", Toast.LENGTH_LONG).show();
+        }
 
         count++;
     }
 
 
-    long NumberOfImages(String repName){
+    long NumberOfImages(String repName) {
         File dir = new File(repName);
         int totalNumFiles = dir.listFiles().length;
         return totalNumFiles;
     }
-    
 }

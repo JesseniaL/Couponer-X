@@ -21,21 +21,15 @@
         android:textSize="35sp"
         android:textStyle="bold"
         android:layout_weight="0.04"
-        android:layout_marginRight="52dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="24dp"
-        android:layout_above="@+id/content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
 
     <FrameLayout
         android:id="@+id/content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="368dp"
         android:layout_weight="0.01"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentBottom="true">
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/navigation"
@@ -45,17 +39,23 @@
             android:background="?android:attr/windowBackground"
             app:menu="@menu/navigation" />
 
-        <TextView
-            android:id="@+id/test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="wrap_content"
+            android:layout_width="93dp"
             android:layout_height="wrap_content"
-            android:text="Test Button" />
+            android:layout_above="@+id/button2"
+            android:layout_centerHorizontal="true"
+            android:text="Test Button"
+            android:textSize="12sp"/>
+
+        <Button
+            android:id="@+id/viewButton"
+            android:layout_width="160dp"
+            android:layout_height="66dp"
+            android:layout_margin="122sp"
+            android:text="Coupon List"
+            android:textSize="20sp" />
 
     </FrameLayout>
 
@@ -68,9 +68,9 @@
         android:layout_width="98sp"
         android:layout_height="64sp"
         android:background="@drawable/camera"
-        android:layout_marginTop="18dp"
-        android:layout_below="@+id/message"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp" />
 
     <Button
         android:id="@+id/button2"
@@ -81,8 +81,7 @@
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="24sp"
-        android:layout_marginTop="21dp"
-        android:layout_below="@+id/button1"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <ImageView
@@ -97,5 +96,15 @@
         android:layout_marginTop="109dp"
         android:adjustViewBounds="false"
         android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:text="TextView" />
 
 </RelativeLayout>
