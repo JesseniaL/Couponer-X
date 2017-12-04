@@ -74,15 +74,8 @@ public class Main extends AppCompatActivity {
             //m.str(storeName);
 
             public void onClick(View v) {
-//                Toast.makeText(Main.this, "Im In" , Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Main.this, ViewStores.class);
-                if (intent != null)
-                    Toast.makeText(Main.this, "Im In" , Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(Main.this, "Im out" , Toast.LENGTH_SHORT).show();
-
-//
-//                startActivity(intent);
+                Intent intent = new Intent(Main.this, MainActivity.class);
+                startActivity(intent);
             }
             /*
             @Override
