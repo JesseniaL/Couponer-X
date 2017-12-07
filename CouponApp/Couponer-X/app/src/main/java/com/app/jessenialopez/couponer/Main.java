@@ -193,6 +193,7 @@ public class Main extends AppCompatActivity {
 
         else {
             Toast.makeText(this, "ERROR! Coupon NOT Saved.", Toast.LENGTH_LONG).show();
+
         }
 
         count++;
