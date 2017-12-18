@@ -31,14 +31,6 @@
         android:layout_weight="0.01"
         android:layout_alignParentBottom="true">
 
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="?android:attr/windowBackground"
-            app:menu="@menu/navigation" />
-
 
         <Button
             android:id="@+id/button3"
@@ -56,6 +48,14 @@
             android:layout_margin="122sp"
             android:text="Coupon List"
             android:textSize="20sp" />
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/button_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/navigation" />
 
     </FrameLayout>
 
