@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/h"
+        android:title="Home"
+        android:icon="@drawable/ic_home_black_24dp"
+        />
+
+    <item
+        android:id="@+id/lt"
+        android:title="Coupon List"
+        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+        />
+
+    <item
+        android:id="@+id/pics"
+        android:title="Coupon Images"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        />
+
+</menu>

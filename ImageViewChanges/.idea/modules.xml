@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Combine_Code_OCR_Database.iml" filepath="$PROJECT_DIR$/Combine_Code_OCR_Database.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ImageViewChanges.iml" filepath="$PROJECT_DIR$/ImageViewChanges.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
